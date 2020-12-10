@@ -1,4 +1,5 @@
 language: java
 
 build: 
-  script: ./gradlew clean build -Dcomision=10
+
+  script: ./gradlew clean build -Dpropina=10
