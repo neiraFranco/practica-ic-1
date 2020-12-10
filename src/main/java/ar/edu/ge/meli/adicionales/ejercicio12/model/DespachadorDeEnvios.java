@@ -8,11 +8,13 @@ import java.util.List;
 public class DespachadorDeEnvios {
     private final CalculadorDeCosto calculadorDeCosto;
     private final AsignadorDeVehiculo asignadorDeVehiculo;
+    private Integer propina;
     private List<EnvioDespachado> enviosDespachados;
 
     public DespachadorDeEnvios(CalculadorDeCosto calculadorDeCosto, AsignadorDeVehiculo asignadorDeVehiculo) {
         this.calculadorDeCosto = calculadorDeCosto;
         this.asignadorDeVehiculo = asignadorDeVehiculo;
+        this.propina = Integer.valueOf(System.getProperty("propina"));
         enviosDespachados = new ArrayList<>();
     }
 
@@ -22,11 +24,13 @@ public class DespachadorDeEnvios {
         EnvioADespachar envioADespachar = new EnvioADespachar(paquetes, direccionDeEntrega);
         Integer costo = calculadorDeCosto.calcularCostoPara(envioADespachar);
         String vehiculo = asignadorDeVehiculo.asignarVehiculoPara(envioADespachar);
-        return envioDespachado(envioADespachar, costoConValoresAdministrativos(costo), vehiculo);
+        return envioDespachado(envioADespachar, costoConValoresExtras(costo, vehiculo), vehiculo);
     }
 
-    private Integer costoConValoresAdministrativos(Integer costo) {
-        return enviosDespachados.size() >= 10 ? costo + costo * 10 / 100 : costo;
+    private Integer costoConValoresExtras(Integer costo, String vehiculo) {
+        Integer costoAdministrativo = enviosDespachados.size() >= 10 ? costo * 10 / 100 : 0;
+        Integer propinaASumar = "BICICLETA".equals(vehiculo) ? propina : 0;
+        return costo + costoAdministrativo + propinaASumar;
     }
 
     private EnvioDespachado envioDespachado(EnvioADespachar envioADespachar, Integer costo, String vehiculo) {

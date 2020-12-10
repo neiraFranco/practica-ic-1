@@ -20,30 +20,39 @@ public class DespachadorDeEnviosTest {
     private String direccionDeEntrega;
 
     @Test
-    public void unEnvioEsRealizadoPorElDespachador() {
-        dadosUnGrupoDePaquetesYUnaDireccionDeEntregaParaEnvio();
+    public void unEnvioEsRealizadoPorElDespachadorEnBicicleta() {
+        dadosUnGrupoDePaquetesYUnaDireccionDeEntregaParaEnvioConPeso(4.0);
         cuandoSeDespachaUnTotalDeEnviosIgualA(1);
         entoncesElVehiculoAsignadoEs("BICICLETA");
         entoncesElTotalDeEnviosDespachadosEs(1);
-        entoncesElCostoDelUltimoEnvioEs(50); // Envio con 1 paquete: costo base $50
+        entoncesElCostoDelUltimoEnvioEs(60); // Envio con 1 paquete: costo base $50, CON propina
+    }
+
+    @Test
+    public void unEnvioEsRealizadoPorElDespachadorEnAuto() {
+        dadosUnGrupoDePaquetesYUnaDireccionDeEntregaParaEnvioConPeso(30.0);
+        cuandoSeDespachaUnTotalDeEnviosIgualA(1);
+        entoncesElVehiculoAsignadoEs("AUTO");
+        entoncesElTotalDeEnviosDespachadosEs(1);
+        entoncesElCostoDelUltimoEnvioEs(50); // Envio con 1 paquete: costo base $50, SIN propina
     }
 
     @Test
     public void diezEnviosSonRealizadosPorElDespachador() {
-        dadosUnGrupoDePaquetesYUnaDireccionDeEntregaParaEnvio();
+        dadosUnGrupoDePaquetesYUnaDireccionDeEntregaParaEnvioConPeso(4.0);
         cuandoSeDespachaUnTotalDeEnviosIgualA(10);
         entoncesElVehiculoAsignadoEs("BICICLETA");
         entoncesElTotalDeEnviosDespachadosEs(10);
-        entoncesElCostoDelUltimoEnvioEs(50);
+        entoncesElCostoDelUltimoEnvioEs(60);
     }
 
     @Test
     public void onceEnviosSonRealizadosPorElDespachadorYElUltimoTieneUnCostoExtra() {
-        dadosUnGrupoDePaquetesYUnaDireccionDeEntregaParaEnvio();
+        dadosUnGrupoDePaquetesYUnaDireccionDeEntregaParaEnvioConPeso(4.0);
         cuandoSeDespachaUnTotalDeEnviosIgualA(11);
         entoncesElVehiculoAsignadoEs("BICICLETA");
         entoncesElTotalDeEnviosDespachadosEs(11);
-        entoncesElCostoDelUltimoEnvioEs(55); // Se agrega 10% del costo base
+        entoncesElCostoDelUltimoEnvioEs(65); // Se agrega 10% del costo base
     }
 
     @Test
@@ -59,8 +68,8 @@ public class DespachadorDeEnviosTest {
         }
     }
 
-    private void dadosUnGrupoDePaquetesYUnaDireccionDeEntregaParaEnvio() {
-        paquetes = Collections.singletonList(new Paquete(1.0));
+    private void dadosUnGrupoDePaquetesYUnaDireccionDeEntregaParaEnvioConPeso(Double peso) {
+        paquetes = Collections.singletonList(new Paquete(peso));
         direccionDeEntrega = "Av.Cordoba 3000";
     }
 

@@ -35,7 +35,6 @@ public class AsignadorDeVehiculoTest {
     @Test
     public void unEnvioConPeso5KgTieneAsignadoBicicleta() {
         dadoUnEnvioConPesoEnKg(5.0);
-        conCantidadDePaquetes(2);
         cuandoSeEvaluaElPesoParaAsignarVehiculo();
         entoncesElVehiculoAsignadoEs("BICICLETA");
     }

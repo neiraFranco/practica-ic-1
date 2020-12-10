@@ -29,7 +29,7 @@ public class DespachadorDeEnviosMockingTest {
         entoncesElVehiculoAsignadoEs("BICICLETA");
         entoncesSeAsignoVehiculoUnNumeroDeVecesIgualA(1);
         entoncesElTotalDeEnviosDespachadosEs(1);
-        entoncesElCostoDelUltimoEnvioEs(50); // Envio con 1 paquete: costo base $50
+        entoncesElCostoDelUltimoEnvioEs(60); // Envio con 1 paquete: costo base $50
     }
 
     @Test
@@ -40,7 +40,7 @@ public class DespachadorDeEnviosMockingTest {
         entoncesElVehiculoAsignadoEs("BICICLETA");
         entoncesSeAsignoVehiculoUnNumeroDeVecesIgualA(10);
         entoncesElTotalDeEnviosDespachadosEs(10);
-        entoncesElCostoDelUltimoEnvioEs(50);
+        entoncesElCostoDelUltimoEnvioEs(60);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class DespachadorDeEnviosMockingTest {
         entoncesElVehiculoAsignadoEs("BICICLETA");
         entoncesSeAsignoVehiculoUnNumeroDeVecesIgualA(11);
         entoncesElTotalDeEnviosDespachadosEs(11);
-        entoncesElCostoDelUltimoEnvioEs(55); // Se agrega 10% del costo base
+        entoncesElCostoDelUltimoEnvioEs(65); // Se agrega 10% del costo base
     }
 
     @Test

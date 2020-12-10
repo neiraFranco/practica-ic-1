@@ -20,6 +20,10 @@ application {
     mainClassName = 'ar.com.grupoesfera.capacitacion.enviospostales.Aplicacion'
 }
 
+test {
+    systemProperties = System.properties
+}
+
 jar {
     manifest {
         attributes 'Main-Class': 'ar.com.grupoesfera.capacitacion.enviospostales.Aplicacion'
