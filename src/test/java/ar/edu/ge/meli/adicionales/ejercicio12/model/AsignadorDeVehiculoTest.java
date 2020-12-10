@@ -1,8 +1,10 @@
 package ar.edu.ge.meli.adicionales.ejercicio12.model;
 
 import ar.edu.ge.meli.adicionales.ejercicio12.exceptions.PesoExcedidoExcepcion;
+import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,8 +17,17 @@ public class AsignadorDeVehiculoTest {
     private String vehiculoAsignado;
 
     @Test
-    public void unEnvioConPesoMedioKgTieneAsignadoBicicleta() {
+    public void unEnvioConUnPaqueteConPesoMedioKgTieneAsignadoDron() {
         dadoUnEnvioConPesoEnKg(0.5);
+        conCantidadDePaquetes(1);
+        cuandoSeEvaluaElPesoParaAsignarVehiculo();
+        entoncesElVehiculoAsignadoEs("DRON");
+    }
+
+    @Test
+    public void unEnvioConCincoPaquetesConPesoMedioKgTieneAsignadoBicicleta() {
+        dadoUnEnvioConPesoEnKg(0.5);
+        conCantidadDePaquetes(5);
         cuandoSeEvaluaElPesoParaAsignarVehiculo();
         entoncesElVehiculoAsignadoEs("BICICLETA");
     }
@@ -24,6 +35,7 @@ public class AsignadorDeVehiculoTest {
     @Test
     public void unEnvioConPeso5KgTieneAsignadoBicicleta() {
         dadoUnEnvioConPesoEnKg(5.0);
+        conCantidadDePaquetes(2);
         cuandoSeEvaluaElPesoParaAsignarVehiculo();
         entoncesElVehiculoAsignadoEs("BICICLETA");
     }
@@ -72,6 +84,13 @@ public class AsignadorDeVehiculoTest {
     private void dadoUnEnvioConPesoEnKg(Double peso) {
         List<Paquete> paquetes = paquetesConPesoEnKg(peso);
         envio = new EnvioADespachar(paquetes, "Av.Cordoba 3000");
+    }
+
+    private void conCantidadDePaquetes(Integer cantidad) {
+        Double pesoPorPaquete = envio.peso() / cantidad;
+        envio.vaciar();
+        while (envio.cantidadDePaquetes() < cantidad)
+            envio.agregarPaquete(new Paquete(pesoPorPaquete));
     }
 
     private void cuandoSeEvaluaElPesoParaAsignarVehiculo() {

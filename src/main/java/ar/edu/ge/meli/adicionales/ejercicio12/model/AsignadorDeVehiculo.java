@@ -11,6 +11,8 @@ public class AsignadorDeVehiculo {
         if (peso > 150)
             throw new PesoExcedidoExcepcion("El peso del envío supera el máximo permitido.", peso);
         if (peso > 50) return CAMIONETA;
-        return peso > 5 ? AUTO : BICICLETA;
+        if (peso > 5) return AUTO;
+        if (peso > 0.5) return BICICLETA;
+        return envio.cantidadDePaquetes() > 1 ? BICICLETA : DRON;
     }
 }
