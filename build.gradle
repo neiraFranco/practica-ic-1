@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'maven'
+    id 'com.adarshr.test-logger' version '2.1.1'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'org.mockito:mockito-all:1.9.5'
+    testCompile 'junit:junit:4.13'
+    testCompile 'org.assertj:assertj-core:3.17.1'
+}
+
+application {
+    mainClassName = 'ar.com.grupoesfera.capacitacion.enviospostales.Aplicacion'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'ar.com.grupoesfera.capacitacion.enviospostales.Aplicacion'
+    }
+}
