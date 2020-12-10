@@ -2,6 +2,7 @@ package ar.edu.ge.meli.adicionales.ejercicio12.model;
 
 import ar.edu.ge.meli.adicionales.ejercicio12.exceptions.PaquetesFaltantesExcepcion;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,12 +35,19 @@ public class DespachadorDeEnvios {
     }
 
     private EnvioDespachado envioDespachado(EnvioADespachar envioADespachar, Integer costo, String vehiculo) {
-        EnvioDespachado envioDespachado = new EnvioDespachado(envioADespachar, costo, vehiculo);
+        EnvioDespachado envioDespachado = new EnvioDespachado(envioADespachar, costo, vehiculo, LocalDateTime.now());
         enviosDespachados.add(envioDespachado);
         return envioDespachado;
     }
 
     public Integer cantidadDeEnviosDespachados() {
         return enviosDespachados.size();
+    }
+
+    public void generarReporte(){
+        for(EnvioDespachado envio : this.enviosDespachados){
+            System.out.println(envio.fechaDespacho() + " ----- Se envia en " + envio.vehiculo() +
+                    "con " + envio.paquetes.size() + " paquetes y un peso total de " + envio.peso() + "kg.");
+        }
     }
 }
